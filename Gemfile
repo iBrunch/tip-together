@@ -32,3 +32,4 @@ end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-bootstrapped'
+gem 'mailgunner', '~> 2.4'
