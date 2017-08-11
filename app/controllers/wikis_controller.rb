@@ -17,6 +17,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
     @wiki.user = current_user
     
     if @wiki.save
@@ -36,6 +37,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
  
     if @wiki.save
       flash[:notice] = "Wiki was updated."
@@ -47,7 +49,8 @@ class WikisController < ApplicationController
   end
   
   def destroy
-    @wiki = Wiki.find(params[:id]).delete
+    @wiki = Wiki.find(params[:id])
+    @wiki.destroy!
     
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
@@ -58,17 +61,14 @@ class WikisController < ApplicationController
     end
   end
   
- private
-  def authorize_user
-    unless current_user.admin?
-      flash[:alert] = "You must be an admin to do that."
-      redirect_to wikis_path
-    end
+  def downgrade
+    current_user.member!
   end
   
-  def allow_premium
+ private
+  def authorize_user
     unless current_user.admin? || current_user.premium?
-      flash[:alert] = "Get a premium account to create wikis!"
+      flash[:alert] = "You must be an admin to do that."
       redirect_to wikis_path
     end
   end

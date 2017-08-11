@@ -1,17 +1,27 @@
-<h1>All Wikis</h1>
 <div class="row">
-    <div class="col-md-8">
-        <% @wikis.each do |wiki| %>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <%= link_to wiki.title, wiki %>
-                    </h4>
-                </div>
-            </div>
-        <% end %>
-    </div>
-    <div class="col-md-4">
-        <%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
+    <div class="col-md-12">
+        <h1>All Wikis <%= link_to "New Wiki", new_wiki_path(@wiki), class: 'btn btn-success btn-sm pull-right' %></h1>
     </div>
 </div>
+    <div class="row"> 
+        <div class="col-md-12">
+            <% @wikis.each do |wiki| %>
+                <% if wiki.private == false %>
+                      <p><%= link_to wiki.title, wiki %></p>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <% if current_user && current_user.role == 'premium' %>
+      <div>
+        <% if current_user.wikis.count >= 1 %>
+      <h2>Private Wikis</h2>
+          <% current_user.wikis.each do |wiki| %>
+              <% if wiki.private %>
+                <p><%= link_to wiki.title, wiki %> | Private</p>
+              <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    

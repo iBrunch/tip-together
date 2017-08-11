@@ -34,7 +34,17 @@
       </div>
     <% end %>
     <hr>
-
+    
+    <% if current_user.premium? %>
+      <h2>Downgrade to Account</h2>
+      <p><%= button_to "Downgrade to Regular Membership", downgrade_path,  class: "btn btn-danger", data: { confirm: "Are you sure you would like to remove premium status from your account?" }, method: :downgrade %></p>
+    <% else %>
+      <h2>Upgrade to Premium Account</h2>
+      <%= button_to "Upgrade", charges_path, class: "btn btn-primary" %></p>
+    <% end %>
+    
+    <hr>
+     
     <h2>Cancel my account</h2>
 
     <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: "btn btn-danger", data: { confirm: "Are you sure? You cannot undo this." }, method: :delete %></p>
