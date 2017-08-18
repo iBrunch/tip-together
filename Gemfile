@@ -34,3 +34,4 @@ gem 'devise'
 gem 'devise-bootstrapped'
 gem "pundit"
 gem 'stripe'
+gem 'redcarpet'
