@@ -9,8 +9,17 @@
       <li>Upkeep wiki as needed.</li>
     </ul>
   </div>
+
   <div class="col-md-8">
     <%= form_for @wiki do |f| %>
+      <% if @wiki.errors.any? %>
+        <% @wiki.errors.full_messages.each do |message| %>
+          <ul style="list-style: none;" class="alert alert-danger">
+            <li><%= message %></li>
+          </ul>
+        <% end %>
+      <% end %>
+    
       <div class="form-group">
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>

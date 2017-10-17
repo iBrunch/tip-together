@@ -8,3 +8,15 @@
     <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
   </div>
 </div>
+<% if @wiki.private %>
+  <% if Collaborator.exists?(wiki_id: @wiki) %>
+    <h4>Collaborators</h4>
+    <ul>
+      <% @wiki.collaborators.each do |collaborator| %>
+        <li>
+          <h4><%= User.find_by_id(collaborator.user_id).email %> <%= link_to "", "/wikis/#{@wiki.id}/collaborators/#{collaborator.id}" %> </h4>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

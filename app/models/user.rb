@@ -6,5 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   enum role: [:member, :admin, :premium]
-  has_many :wikis
+  has_many :wikis, dependent: :destroy
+  
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
 end

@@ -1,23 +1,25 @@
 class WikisController < ApplicationController
-  before_action :authorize_user, except: [:index, :show, :edit, :update, :new, :create]
+  before_action :authorize_user, except: [:index, :show, :new, :create]
+  before_action :authorize_new, except: [:index, :show, :edit, :update, :destroy]
   
   def index
-    @wikis = Wiki.all
+    @user = current_user
+    @wikis = policy_scope(Wiki)
   end
-
+  
   def show
+    @user = current_user
     @wiki = Wiki.find(params[:id])
   end
 
   def new
+    @user = current_user
     @wiki = Wiki.new
   end
   
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
+    @user = current_user
+    @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
     
     if @wiki.save
@@ -31,14 +33,13 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
+    @collaborator = Collaborator.new
   end
   
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:private]
- 
+    @wiki.assign_attributes(wiki_params)
     if @wiki.save
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
@@ -66,10 +67,24 @@ class WikisController < ApplicationController
   end
   
  private
+ 
   def authorize_user
-    unless current_user.admin? || current_user.premium?
-      flash[:alert] = "You must be an admin to do that."
+    @wiki = Wiki.find(params[:id])
+    @user = current_user
+    unless current_user.admin? || current_user.premium? || @wiki.collaborators.exists?('user_id' => @user.id)
+      flash[:alert] = "You must be a premium member to do that."
       redirect_to wikis_path
     end
+  end
+  
+  def authorize_new
+    unless current_user.admin? || current_user.premium?
+      flash[:alert] = "You must be a premium member to do that."
+      redirect_to wikis_path
+    end
+  end
+ 
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private, :user, :user_ids)
   end
 end
