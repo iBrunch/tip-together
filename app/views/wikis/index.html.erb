@@ -15,19 +15,22 @@
             <% end %>
         </div>
     </div>
-    <% if current_user && current_user.role == 'premium' %>
-      <% if current_user.wikis.count >= 1 %>
-      <h2>My Private Wikis</h2>
-      <br>
-        <% current_user.wikis.each do |wiki| %>
-            <% if wiki.private %>
-              <h4><%= link_to wiki.title, wiki %></h4>
-              <p><%=h truncate(wiki.body, :length => 80) %><%= link_to " read more", wiki %></p>
-              <hr>
+    <% if current_user && current_user.premium? %>
+     
+      <h4>My Private Wikis</h4>
+        <% @wikis.each do |wiki| %>
+            <% if wiki.private || wiki.user_id == current_user %>
+              <ul>
+                <li>
+                  <h4>
+                    <%= link_to wiki.title, wiki %>
+                  </h4>
+                  </li>
+              </ul>
             <% end %>
         <% end %>
       <% end %>
-    <% end %>
+              <br>
     <h4>My Collaborations</h4>
     <div class="collaborations">
     <% @wikis.each do |wiki| %>
