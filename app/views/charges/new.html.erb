@@ -1,4 +1,26 @@
+
 <%= form_tag charges_path do %>
-  <h4>Click the button!</h4>
-  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+    <div class="chargepage mx-auto">
+      <h2 class="text-center">Upgrade Your Account</h2>
+      <hr class="star-primary">
+      <br>
+    
+        <div class="upgrade-card">
+            <header class="upgrade-card-container upgrade-card-color">
+                <h3><b>Premium</b></h3>
+            </header>
+            
+            <div class="card-container-text">
+                <h4>Premium members can:</h4>
+                    <ul>
+                        <li>Create new wikis</li>
+                        <li>Create private wikis</li>
+                        <li>Add collaborators on articles</li>
+                        <li>Collaborators can be regular members or premium.</li> 
+                    </ul>
+                <hr>
+                <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+            </div>
+        </div>
+    </div>
 <% end %>

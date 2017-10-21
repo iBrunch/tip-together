@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   end
   post 'downgrade' => 'charges#downgrade'
   get 'welcome/index'
-
   get 'welcome/about'
-  
   root 'welcome#index'
 end

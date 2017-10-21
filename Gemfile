@@ -35,3 +35,4 @@ gem 'devise-bootstrapped'
 gem "pundit"
 gem 'stripe'
 gem 'redcarpet'
+gem 'frontend-generators'
