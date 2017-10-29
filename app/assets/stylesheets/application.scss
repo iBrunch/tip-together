@@ -16,10 +16,18 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  
- .collaborations {
-  margin-bottom: 100px; 
- }
+.collaborations {
+    margin-bottom: 100px; 
+}
  
- .spacer{
+.spacer {
     margin-top: 100px;
+}
+
+.alert {
+    margin-top: 20px; 
+}
+
+.new-wiki-button {
+    margin-top: 20px;     
 }

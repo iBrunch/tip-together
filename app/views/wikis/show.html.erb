@@ -3,20 +3,31 @@
   <div class="col-md-8">
     <p><%= markdown(@wiki.body) %></p>
   </div>
-  <div class="col-md-4">
-    <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-    <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
-  </div>
+
+  <% if @wiki.private? %>
+    <% if Collaborator.exists?(wiki_id: @wiki) %>
+      <div class="col-md-4">
+        <h4>Collaborators</h4>
+        <% @wiki.collaborators.each do |collaborator| %>
+        <ul>
+          <li>
+            <h4><%= User.find_by_id(collaborator.user_id).email %> <%= link_to "", "/wikis/#{@wiki.id}/collaborators/#{collaborator.id}" %> </h4>
+          </li>
+        </ul>
+      </div>
 </div>
-<% if @wiki.private %>
-  <% if Collaborator.exists?(wiki_id: @wiki) %>
-    <h4>Collaborators</h4>
-    <ul>
-      <% @wiki.collaborators.each do |collaborator| %>
-        <li>
-          <h4><%= User.find_by_id(collaborator.user_id).email %> <%= link_to "", "/wikis/#{@wiki.id}/collaborators/#{collaborator.id}" %> </h4>
-        </li>
-      <% end %>
-    </ul>
+          <hr>
+          <% if User.find_by_id(collaborator.user_id).email != current_user && !current_user.premium? %>
+            <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+            <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
+          <% end %>
+        <% end %>
+    <% end %>
   <% end %>
+
+<% if !current_user.premium? %>
+  <%= link_to "Upgrade", new_charge_path, class: 'btn btn-warning' %>
+<% else %>
+  <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+  <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
 <% end %>
