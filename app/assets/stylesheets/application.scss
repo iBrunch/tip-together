@@ -25,7 +25,10 @@
 }
 
 .alert {
-    margin-top: 20px; 
+    position: fixed;
+    left: 50%;
+    width: 60%;
+    transform: translateX(-50%);
 }
 
 .new-wiki-button {
