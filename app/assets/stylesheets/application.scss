@@ -16,6 +16,10 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  
+body {
+    margin-top: 150px;    
+}
+
 .collaborations {
     margin-bottom: 100px; 
 }
@@ -26,6 +30,7 @@
 
 .alert {
     position: fixed;
+    margin-top: -40px;
     left: 50%;
     width: 60%;
     transform: translateX(-50%);
@@ -33,4 +38,15 @@
 
 .new-wiki-button {
     margin-top: 20px;     
+}
+
+.navbar-upgrade {
+    color: green !important;
+    outline: solid 2px green;
+}
+
+.navbar-upgrade:hover {
+    background: green !important;
+    color: white !important;
+    outline: solid 2px green;
 }
