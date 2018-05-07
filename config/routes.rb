@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   
   devise_for :models
   devise_for :users
-  
-  resources :wikis
+
+scope do
+  resources :wikis, path: 'tips'
+end
+
   resources :charges, only: [:new, :create]
   resources :wikis do
     resources :collaborators, only: [:new, :create, :destroy]
@@ -14,3 +17,4 @@ Rails.application.routes.draw do
   get 'welcome/about'
   root 'welcome#index'
 end
+

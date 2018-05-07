@@ -23,10 +23,10 @@ class WikisController < ApplicationController
     @wiki.user = current_user
     
     if @wiki.save
-      flash[:notice] = "Wiki was saved."
+      flash[:notice] = "Tip was saved."
       redirect_to @wiki
     else
-      flash.now[:alert] = "There was an error saving the wiki. Please try again."
+      flash.now[:alert] = "There was an error saving the Tip. Please try again."
       render :new
     end
   end
@@ -41,10 +41,10 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
     if @wiki.save
-      flash[:notice] = "Wiki was updated."
+      flash[:notice] = "Tip was updated."
       redirect_to @wiki
     else
-      flash.now[:alert] = "There was an error saving the wiki. Please try again."
+      flash.now[:alert] = "There was an error saving the tip. Please try again."
       render :edit
     end
   end
@@ -57,7 +57,7 @@ class WikisController < ApplicationController
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
       redirect_to wikis_path
     else
-      flash.now[:alert] = "There was an error deleting the wiki."
+      flash.now[:alert] = "There was an error deleting the tip."
       render :show
     end
   end

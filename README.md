@@ -1,24 +1,14 @@
+## Explanation
+At Tip Together you can read, share and edit helpful tips with people everywhere.
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## Problem
+Finding tips and information scattered across hundreds of articles, social posts, and forums is a project.
 
+## Solution
+Tip together collects the best information so you can avoid the clickbait and useless stuff.
 
-Welcome to your Rails project on Cloud9 IDE!
+## Results
+Users can read and share posts for free and premium users can create new tips and private tips.
 
-To get started, just do the following:
-
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://swiki-ibrunch.c9users.io/).
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+## Conclusion
+Creating Tip Together helped me explore implementing tiered user access and a payment system.

@@ -1,12 +1,12 @@
-<h1>New Wiki</h1>
+<h1>New Tip</h1>
  
 <div class="row">
   <div class="col-md-4">
-    <p>Guidelines for wikis</p>
+    <p>Guidelines for tips</p>
     <ul>
       <li>Post sources for information on page.</li>
       <li>Do not post adult material.</li>
-      <li>Upkeep wiki as needed.</li>
+      <li>Upkeep tip as needed.</li>
     </ul>
   </div>
 
@@ -22,17 +22,17 @@
     
       <div class="form-group">
         <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter tip title" %>
       </div>
       <div class="form-group">
         <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter tip body" %>
       </div>
       
       <% if user_signed_in? && (current_user.admin? || current_user.premium?) %>
         <div class="form-group">
           <%= f.label :private, class: "checkbox pull-right" do %>
-            <%= f.check_box :private, id: "private_wiki" %> Private Wiki
+            <%= f.check_box :private, id: "private_wiki" %> Private Tip
           <% end %>
         </div> 
       <% end %>

@@ -11,7 +11,7 @@
         <% @wiki.collaborators.each do |collaborator| %>
         <ul>
           <li>
-            <h4><%= User.find_by_id(collaborator.user_id).email %> <%= link_to "", "/wikis/#{@wiki.id}/collaborators/#{collaborator.id}" %> </h4>
+            <h4><%= User.find_by_id(collaborator.user_id).email %> <%= link_to "", "/tips/#{@wiki.id}/collaborators/#{collaborator.id}" %> </h4>
           </li>
         </ul>
       </div>
@@ -19,7 +19,7 @@
           <hr>
           <% if User.find_by_id(collaborator.user_id).email != current_user && !current_user.premium? %>
             <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-            <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
+            <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this tip?'} %>
           <% end %>
         <% end %>
     <% end %>
@@ -29,5 +29,5 @@
   <%= link_to "Upgrade", new_charge_path, class: 'btn btn-warning' %>
 <% else %>
   <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-  <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
+  <%= link_to "Delete", wiki_path(@wiki), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this tip?'} %>
 <% end %>
